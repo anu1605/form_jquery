@@ -1,0 +1,14 @@
+{
+  "folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": "../../Downloads/css-challenges"
+    }
+  ],
+  "settings": {
+    "liveServer.settings.multiRootWorkspaceName": "css-challenges",
+    "liveServer.settings.port": 5502
+  }
+}

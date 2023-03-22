@@ -1,0 +1,13 @@
+$('#rows').change(rows);
+function rows() {
+  var row = $('#rows').val();
+
+
+  $.ajax({
+    url: "/php/display.php",
+    type: "post",
+    data: { 'rows': row },
+    success: function (data) {
+    }
+  });
+}

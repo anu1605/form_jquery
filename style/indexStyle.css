@@ -1,0 +1,321 @@
+body {
+  color: rgb(108, 107, 107);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+label {
+  font-size: 0.6rem;
+}
+label:hover{
+  color: blue;
+}
+
+input {
+  font-size: 0.5rem;
+  outline: none;
+}
+
+h2 {
+  font-size: 0.6rem;
+}
+
+option {
+  font-size: 0.5rem;
+}
+
+.information_form {
+  border-radius: 1rem;
+  box-shadow: 1rem 1rem 0 -5px rgb(240, 242, 240);
+  background-color: rgb(249, 249, 249);
+  overflow: hidden;
+}
+
+
+.form_heading {
+  box-sizing: content-box;
+  margin-top: -2rem;
+  height: 3rem;
+  padding-top: 1rem;
+  padding-left: 1rem;
+  background-color: rgb(25, 203, 203);
+  color: white;
+}
+
+.form_content {
+  padding-top: 1rem;
+  height: 100%;
+  padding: 1rem 1rem;
+}
+
+.heading {
+  margin-left: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 200;
+}
+
+h2 {
+  margin-top: 1rem;
+  margin-bottom: 0.1rem;
+  font-weight: 400;
+  width: fit-content;
+  border: none;
+}
+h2:hover{
+  color: blue;
+}
+
+
+a.submit , .button {
+  width: 4rem;
+  font-size: 0.5rem;
+  height: 1.5rem;
+  border-radius: 1rem;
+  margin-top: 1rem;
+  outline: none;
+  border: none;
+  color: white;
+  background-color: rgb(243, 85, 27);
+}
+.button{
+  padding: 0.3rem 1rem;
+  text-decoration: none;
+}
+
+.button:hover {
+  background-color: rgb(82, 9, 184)
+}
+
+.input_text {
+  outline: none;
+  height: 2rem;
+  width: 100%;
+  padding-left: 0.5rem;
+  border-radius: 1rem;
+  border: none;
+  background-color: rgb(224, 223, 223);
+  transition: all 0.2s;
+}
+
+.input_text:hover {
+  box-shadow: 0 0 5px -1px rgb(125, 125, 125);
+}
+
+.hobbies {
+  border: none;
+  width: 100%;
+  outline: none;
+  padding-left: 0.2rem;
+  padding-top: 0.1rem;
+  background-color: rgb(224, 223, 223);
+  color: rgb(108, 107, 107);
+}
+
+.subject {
+  background-color: rgb(224, 223, 223);
+  border-radius: 3px;
+}
+
+.subject_input {
+  display: flex;
+  align-items: center;
+}
+
+.subject_option {
+  width: 0.8rem;
+  height: 0.8rem;
+}
+
+.subject h2 {
+  margin: 0;
+}
+
+.subject_bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 3px;
+  background-color: rgb(224, 223, 223);
+  padding: 0.2rem 0.2rem;
+  padding-left: 0.4rem;
+}
+
+.subject_bar button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 50px;
+  width: fit-content;
+  height: fit-content;
+  background-color: rgb(187, 187, 187);
+  padding: 0.2rem;
+}
+
+.down_arrow {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+/* .option_section {
+  position: absolute;
+  visibility: hidden;
+} */
+
+.expandible_class {
+  position: static;
+  visibility: visible;
+}
+.upload_image{
+  margin-top: 2.6rem;
+}
+.rotate_up {
+  transform: rotate(180deg);
+  transition: all 0.5s;
+}
+
+.rotate_down {
+  transform: rotate(360deg);
+  transition: all 0.3s;
+}
+
+.qualificatio_table {
+  font-size: 0.5rem;
+}
+
+table,
+td,
+th {
+  border: 1px solid rgb(169, 169, 169);
+  border-collapse: collapse;
+}
+
+.radio_button {
+  width: fit-content;
+  height: fit-content;
+  border-radius: 30px;
+  border: none;
+}
+
+.qualification_container h2 {
+  margin-bottom: 0.5rem;
+
+}
+
+td {
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0.2rem;
+}
+
+.qualificatio_table input {
+  width: fit-content;
+  padding: 0.5rem;
+}
+
+td input {
+  border: none;
+  outline: none;
+  text-align: center;
+
+}
+
+.add_and_delete {
+  margin: 0.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add_and_delete button {
+  border: none;
+  border-radius: 40px;
+
+}
+
+.qualificatio_table {
+  display: flex;
+  flex-direction: column;
+}
+
+button[value='+'] ,
+button[value='-'] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1rem;
+  height: 1rem;
+  font-size: 1rem;
+  margin-left: 0.3rem;
+  color: white
+}
+
+button[value='+'] {
+  background-color: green;
+  color: white;
+}
+
+button[value='-'] {
+  background-color: red;
+  color: white;
+}
+
+p[id=message], p[id=error],p[id=pwd_message],p[id=subect_error],p[id=hobbies_error]{
+  display: flex;
+  justify-content: center;
+  font-weight: 600;
+  color: red;
+  font-size: 0.5rem;
+  height: 0.6rem;
+}
+p[id=image_error],p[id=date_error]{
+  height: 0.6rem;
+  font-weight: 600;
+  color: red;
+  font-size: 0.5rem;
+}
+
+.redBorder {
+  border: 1px solid rgb(255, 79, 117);
+  box-shadow: 0 0 5px -1px rgb(255, 92, 127);
+  color: red;
+}
+
+.about_yourself{
+  overflow: scroll;
+}
+.validator{
+  background-color: antiquewhite;
+  padding: 0.2rem 1rem;
+  display: none;
+}
+
+.validator h3{
+  font-size: 0.8rem;
+  font-weight: 500;
+  color:coral;
+}
+.invalid{
+  font-size: 0.5rem;
+  color: coral;
+}
+.valid{
+  font-size: 0.5rem;
+  color: green;
+}
+div[id=print]{
+  margin-top:2rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 0.8rem;
+  color: black;
+}
+textarea{
+  font-size: 0.6rem;
+  width: 100%;
+  resize: none;
+}
