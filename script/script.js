@@ -13,6 +13,30 @@ var response;
 // $("#submit").click(func);
 $(".subject_input > input").change(checkSubject);
 
+// check already selected subject
+for (var i = 0; i < $(".subject_input > input").length; i++) {
+  var input = $(".subject_input > input")[i];
+  if (input.checked == true) {
+    if (selectedSbject.indexOf(input.value) == -1) {
+      selectedSbject.push(input.value);
+    }
+
+  }
+}
+
+// check already selected hobbies
+for (var i = 0; i < $("option").length; i++) {
+  var input = $("option")[i];
+  if (input.selected) {
+    if (selectedHobbies.indexOf(input.value) == -1) {
+      selectedHobbies.push(input.value);
+    }
+
+  }
+}
+
+
+
 $("#option_container").hide();
 $('#hobbies').focus(function () {
   $(this).fadeTo("slow", 0.7);
@@ -24,12 +48,15 @@ $('#hobbies').blur(function () {
 
 
 $("option").click(function () {
-  {
-    if (this.selected) {
-      selectedHobbies.push(this.value);
-      $("#hobbies_error")[0].innerHTML = "";
+  for (var i = 0; i < $("option").length; i++) {
+    var input = $("option")[i];
+    if (input.selected == true) {
+      if (selectedHobbies.indexOf(input.value) == -1) {
+        selectedHobbies.push(input.value);
+      }
+
     }
-    else selectedHobbies.splice(this.value.indexOf(), 1);
+    else if (selectedHobbies.indexOf(input.value) != -1) selectedHobbies.splice(selectedHobbies.indexOf(input.value), 1)
   }
 
 });
@@ -41,6 +68,7 @@ $("option").click(function () {
 // });
 function submit(id) {
 
+  if (emptyInput != undefined) emptyInput.classList.remove("redBorder");
   // validate firstname
   if ($("#fname").val().trim() == "") {
     $("#fname").focus();
@@ -113,6 +141,8 @@ function submit(id) {
   } else $("#subect_error")[0].innerHTML = "";
 
 
+
+
   // validate table
   for (var i = 0; i <= tableCount; i++) {
     if ($("#table_body")[0].rows[i] != undefined)
@@ -167,27 +197,27 @@ function submit(id) {
     return;
   }
 
-  // print output
-  var printContainer = $("#print")[0];
-  printContainer.innerHTML = "";
-  var form = $("#information")[0];
-  var formData = new FormData(form);
+  // // print output
+  // var printContainer = $("#print")[0];
+  // printContainer.innerHTML = "";
+  // var form = $("#information")[0];
+  // var formData = new FormData(form);
 
-  for (item of formData) {
-    if (item[0] == "filename") {
-      var fileInput = $("#myFile");
-      if (fileInput.files && fileInput.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-          printContainer.innerHTML +=
-            '<img style = "width : 10rem" src="' + e.target.result + '"/>';
-        };
+  // for (item of formData) {
+  //   if (item[0] == "filename") {
+  //     var fileInput = $("#myFile");
+  //     if (fileInput.files && fileInput.files[0]) {
+  //       var reader = new FileReader();
+  //       reader.onload = function (e) {
+  //         printContainer.innerHTML +=
+  //           '<img style = "width : 10rem" src="' + e.target.result + '"/>';
+  //       };
 
-        reader.readAsDataURL(fileInput.files[0]);
-      }
-    } else
-      printContainer.innerHTML += item[0] + ": " + item[1] + "<br>" + "<br>";
-  }
+  //       reader.readAsDataURL(fileInput.files[0]);
+  //     }
+  //   } else
+  //     printContainer.innerHTML += item[0] + ": " + item[1] + "<br>" + "<br>";
+  // }
 
 
   $.ajaxSetup({
@@ -226,12 +256,12 @@ function addClass() {
 }
 
 function checkSubject() {
-  console.log(this.value);
   if (this.checked == true) {
     $("#subect_error")[0].innerHTML = "";
-    selectedSbject.push(this.value);
-  } else selectedSbject.splice(this.value.indexOf, 1);
-  console.log(selectedSbject);
+    if (selectedSbject.indexOf(this.value) == -1)
+      selectedSbject.push(this.value);
+  } else if (selectedSbject.indexOf(this.value) != -1) selectedSbject.splice(selectedSbject.indexOf(this.value), 1);
+
 }
 
 function addFunc() {
@@ -244,7 +274,6 @@ function addFunc() {
   var x = $("#table_body")[0].rows[tableCount - 1];
 
   if (!checkEmptyCell(cellLength - 1, x)) {
-    console.log("failed");
     return;
   }
   $("#message")[0].innerHTML = "";
@@ -420,7 +449,7 @@ function validateEmail() {
   $.ajax({
     url: '/php/checkEmail.php',
     type: 'post',
-    data: 'email=' + $("#email").val() + '&action=' + 'checkmail',
+    data: 'email=' + $("#email").val() + '&action=' + 'checkmail' + '&ID=' + $('.setEditID'),
     success: function (msg) {
       if ($.trim(msg) == 'inuse') {
         alert("Email Already In Use");
@@ -443,7 +472,6 @@ function validateEmail() {
 
 //   var filePath = fileInput.value;
 //   var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
-//   console.log(fileInput.files[0].size);
 
 //   if (!allowedExtensions.exec(filePath)) {
 //     imagePara.innerHTML = "wrong image format";

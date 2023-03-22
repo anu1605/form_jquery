@@ -1,4 +1,3 @@
-
 <?php
 include  "php/" . "connectConfig.php";
 if (isset($_GET['ID'])) {
@@ -252,6 +251,8 @@ if (isset($_GET['ID'])) {
     </section>
     </div>
     <div id="print"></div>
+
+    <p class="setEditID" id="<?php echo $id; ?>"></p>
 
 </body>
 
