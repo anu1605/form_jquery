@@ -68,6 +68,8 @@ $("option").click(function () {
 // });
 function submit(id) {
 
+  console.log(selectedHobbies);
+  console.log(selectedSbject);
   if (emptyInput != undefined) emptyInput.classList.remove("redBorder");
   // validate firstname
   if ($("#fname").val().trim() == "") {
@@ -219,6 +221,7 @@ function submit(id) {
   //     printContainer.innerHTML += item[0] + ": " + item[1] + "<br>" + "<br>";
   // }
 
+  debugger;
 
   $.ajaxSetup({
     cache: false

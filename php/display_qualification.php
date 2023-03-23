@@ -53,7 +53,7 @@
 
                 if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
                     $post_request_id = $_SESSION['id'];
-                    $user_exist = $conn->query("SELECT * FROM Qualification_table WHERE post_request_id = $post_request_id");
+                    $user_exist = $conn->query("SELECT * FROM table_form WHERE post_id = $post_request_id");
                     if (!($user_exist->num_rows > 0))
                         header("location: /php/login.php");
                 } else

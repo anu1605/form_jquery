@@ -29,9 +29,12 @@ $.ajaxSetup({
 });
 
 function deleteInQualification(element, table) {
+  if (table == 'qualification')
+    var url = "/php/display_qualification.php";
+  else url = "/php/display.php"
   if ((confirm("Are you sure you want to delete this row"))) {
     $.ajax({
-      url: "/php/display.php",
+      url: url,
       type: "post",
       data: { 'deleteID': element, 'table': table },
       success: function (result) {
