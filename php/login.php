@@ -65,7 +65,11 @@ if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
         </div>
 
 
-        <div id="buttonDiv"></div>
+        <div id="buttonDiv">
+        </div>
+        <button>
+            <div class="g_id_signout">Sign Out</div>
+        </button>
     </form>
     <p style="display:none;" class="session" id="<?php echo  $_SESSION['id']; ?>"></p>
     <script src="/script/login.js"></script>
