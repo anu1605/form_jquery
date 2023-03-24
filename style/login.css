@@ -120,8 +120,9 @@ form {
     margin: 0 0.5rem;
   }
 
-.gSignIn{
+#buttonDiv{
 width: fit-content;
-align-self: center;
 justify-self: center;
+margin-top: 1rem;
+margin-bottom: 2rem;
 }

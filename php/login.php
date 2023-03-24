@@ -19,13 +19,14 @@ if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
 
 <head>
     <meta charset="UTF-8">
-    <meta name="google-signin-client_id" content="194269230950-7q4v0g4ishie2bk4mb9u1i5t4mdtn904.apps.googleusercontent.com">
+    <!-- <meta name="google-signin-client_id" content="194269230950-7q4v0g4ishie2bk4mb9u1i5t4mdtn904.apps.googleusercontent.com"> -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <link rel="stylesheet" href="/style/login.css">
-    <script src="https://apis.google.com/js/client:platform.js?onload=renderButton" async defer></script>
+    <link rel="shortcut icon" href="#">
     <title>Document</title>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 
 <body>
@@ -63,11 +64,12 @@ if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
             <hr>
         </div>
 
-        <div class="gSignIn" id="gSignIn"></div>
+
+        <div id="buttonDiv"></div>
     </form>
     <p style="display:none;" class="session" id="<?php echo  $_SESSION['id']; ?>"></p>
+    <script src="/script/login.js"></script>
 </body>
 
-<script src="/script/login.js"></script>
 
 </html>
