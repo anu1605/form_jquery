@@ -46,6 +46,7 @@ $(document).mousedown(function () {
 $("input[name=email]").blur(checkEmail)
 
 
+
 function checkEmail() {
     if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($('input[name=email').val()) && $('input[name=email').val() != '') {
         $('.session').css('display', 'block');
@@ -69,7 +70,6 @@ function renderButton() {
         'scope': 'profile email',
         'width': 240,
         'height': 50,
-        'align-self': 'center',
         'longtitle': true,
         'theme': 'dark',
         'onsuccess': onSuccess,
