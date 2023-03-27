@@ -72,9 +72,10 @@ function handleCredentialResponse(response) {
             type: "post",
             data: "action=" + "loginPage" + "&loginBy=" + "glogin" + "&email=" + body.email,
             success: function (msg) {
-                alert(msg);
                 if ($.trim(msg) == "success")
                     window.location.href = "/php/display.php";
+                else
+                    window.location.href = "/newIndex.php";
             }
         })
     }
@@ -94,3 +95,6 @@ window.onload = function () {
     );
     google.accounts.id.prompt(); // also display the One Tap dialog
 }
+
+// FACEBOOK SIGN IN 
+

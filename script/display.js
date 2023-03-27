@@ -155,5 +155,5 @@ function logout() {
   })
 }
 
-
+let table = new DataTable('#mytable');
 

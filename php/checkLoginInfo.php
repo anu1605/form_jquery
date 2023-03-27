@@ -35,6 +35,14 @@ if (isset($_POST['action']) && $_POST['action'] == 'loginPage') {
     else if (isset($_POST['loginBy']) && $_POST['loginBy'] == 'glogin') {
         $email =  $_POST['email'];
         $query = $conn->query("SELECT * FROM table_form WHERE  email = '$email'  ");
+
+        if (!($query->num_rows >= 1)) {
+            $insert = $conn->query("INSERT INTO table_form (email) VALUES ('$email')");
+            $id = $conn->query("SELECT max(post_id) as id FROM table_form")->fetch_assoc()['id'];
+            $_SESSION['id'] = $id;
+            setcookie('id', $_SESSION['id'], time() + 86400 * 30, '/');
+            exit('success');
+        }
     }
 
     $id = $query->fetch_assoc()['post_id'];
@@ -47,12 +55,6 @@ if (isset($_POST['action']) && $_POST['action'] == 'loginPage') {
     } else
         exit("invalid");
 }
-
-
-
-
-
-
 
 $conn->close();
 ?>
