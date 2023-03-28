@@ -1,4 +1,7 @@
 $(document).ready(function () {
+
+
+
     var table = $('#example').DataTable({
         fixedHeader: {
             header: true
@@ -7,13 +10,15 @@ $(document).ready(function () {
         "serverSide": true,
         "ajax": {
             "url": "/test.php",
-            "type": "post"
+            "type": "post",
+            "data": $('option').val()
         },
 
         "info": true,
         "ordering": true,
         "paging": true,
         "filter": true,
+        "pageLength": '10',
 
         // "lengthChange": true,
         "order": [[2, "desc"], [3, 'asc']],
@@ -21,6 +26,7 @@ $(document).ready(function () {
 
 
     });
+
 })
 
 

@@ -10,8 +10,9 @@ if (isset($_COOKIE['id']) && !empty($_COOKIE['id'])) {
 
 
 include("php/connectConfig.php");
+$length = $_POST['length'];
 $totalRecords;
-$query = $conn->query("SELECT * FROM table_form order by post_id asc");
+$query = $conn->query("SELECT * FROM table_form");
 $array = [];
 
 while ($row = $query->fetch_assoc()) {
