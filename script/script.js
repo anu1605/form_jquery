@@ -9,6 +9,7 @@ var subjectList = [];
 var selectedSbject = [];
 var selectedHobbies = [];
 var response;
+var inuseVal;
 
 // $("#submit").click(func);
 $(".subject_input > input").change(checkSubject);
@@ -67,9 +68,6 @@ $("option").click(function () {
 
 // });
 function submit(id) {
-
-  console.log(selectedHobbies);
-  console.log(selectedSbject);
   if (emptyInput != undefined) emptyInput.classList.remove("redBorder");
   // validate firstname
   if ($("#fname").val().trim() == "") {
@@ -104,6 +102,10 @@ function submit(id) {
     if (emptyInput != '')
       // $('#error').innerHTML = "Enter valid Email";
       email.scrollIntoView();
+    return;
+  }
+  if (inuseVal) {
+    alert("Email already in use");
     return;
   }
 
@@ -221,7 +223,7 @@ function submit(id) {
   //     printContainer.innerHTML += item[0] + ": " + item[1] + "<br>" + "<br>";
   // }
 
-  debugger;
+
 
   $.ajaxSetup({
     cache: false
@@ -444,22 +446,29 @@ $("#email").blur(function (callback) {
 });
 
 function validateEmail() {
+  $.ajax({
+    url: '/php/checkEmail.php',
+    type: 'post',
+    data: 'email=' + $("#email").val() + '&action=' + 'checkmail' + '&ID=' + $('.setEditID').attr('id'),
+    success: function (msg) {
+      if ($.trim(msg) == 'inuse') {
+        inuse(true);
+
+      }
+      else inuse(false);
+    }
+  })
+
   if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($("#email")[0].value)) {
     $("#error")[0].innerHTML = "Enter valid Email";
     return false;
   } else $("#error")[0].innerHTML = "";
 
-  $.ajax({
-    url: '/php/checkEmail.php',
-    type: 'post',
-    data: 'email=' + $("#email").val() + '&action=' + 'checkmail' + '&ID=' + $('.setEditID'),
-    success: function (msg) {
-      if ($.trim(msg) == 'inuse') {
-        alert("Email Already In Use");
-      }
-    }
-  })
   return true;
+}
+
+function inuse(boolVal) {
+  inuseVal = boolVal;
 }
 
 

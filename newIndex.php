@@ -2,6 +2,7 @@
 include  "php/" . "connectConfig.php";
 if (isset($_GET['ID'])) {
     $id = $_GET['ID'];
+
     $select = $conn->query("SELECT * FROM table_form WHERE post_id=$id");
     $data = $select->fetch_assoc();
     $firstname = $data['firstname'];
@@ -252,7 +253,10 @@ if (isset($_GET['ID'])) {
     </div>
     <div id="print"></div>
 
-    <p class="setEditID" id="<?php echo $id; ?>"></p>
+
+
+
+    <p class="setEditID" id="<?php echo $_GET['ID']; ?>"></p>
 
 </body>
 

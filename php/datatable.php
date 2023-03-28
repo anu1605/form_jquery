@@ -10,12 +10,17 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedheader/3.3.2/js/dataTables.fixedHeader.min.js"></script>
+
+
+    <script></script>
     <script src="/script/datatable.js"></script>
 </head>
 
 <body>
     <table id="example" class="display" style="width:100%">
-        <thead>
+        <thead style="background-color: white;">
             <tr>
                 <th>firstname</th>
                 <th>lastname</th>
@@ -33,6 +38,7 @@
 
 
         </tbody>
+
 
     </table>
 </body>

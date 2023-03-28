@@ -6,7 +6,13 @@ if (isset($_POST['action']) && $_POST['action'] == "RegistrationofUsers") {
     extract($_POST);
 }
 
+
 include("connectConfig.php");
+
+// include("checkEmail.php");
+// echo $inuse . '<br>';
+// if ($inuse)
+//     exit();
 
 // foreach ($_POST as $key->$value) {
 //     echo ' ' . $key;
@@ -92,6 +98,10 @@ $about = $_POST['about_yourself'];
 //         return;
 //     }
 // }
+
+if (isset($_POST['ID']) && $_POST['ID'] !== 'undefined') {
+    $get_id = $_POST['ID'];
+}
 
 
 // sql query
