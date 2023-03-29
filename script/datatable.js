@@ -1,58 +1,59 @@
 $(document).ready(function () {
 
-
-
     var table = $('#example').DataTable({
         fixedHeader: {
             header: true
         },
         "processing": true,
         "serverSide": true,
+        "aLengthMenu": [[10, 20, 30, 500, -1], [10, 20, 30, 500, 'ALL']],
+
+
         "ajax": {
             "url": "/test.php",
             "type": "post",
-            "data": $('option').val()
+
         },
 
+        "columnDefs": [
+            { "name": 'firstname', "targets": 0 },
+            { "name": 'lastname', "targets": 1 },
+            { "name": 'email', "targets": 2 },
+            { "name": 'gender', "targets": 3 },
+            { "name": 'hobbies', "targets": 4, 'orderable': false },
+            { "name": 'subject', "targets": 5, 'orderable': false },
+            { "name": 'about_yourself', "targets": 6, 'orderable': false },
+            { "name": 'image_files', "targets": 7, 'orderable': false },
+            { "name": 'date', "targets": 8 },
+            { "name": 'button', "targets": 9, 'orderable': false }
+
+        ],
         "info": true,
         "ordering": true,
         "paging": true,
         "filter": true,
-        "pageLength": '10',
+        "sortable": true,
 
-        // "lengthChange": true,
-        "order": [[2, "desc"], [3, 'asc']],
-        "aLengthMenu": [[10, 20, 30, 500, -1], [10, 20, 30, 500, 'ALL']],
-
-
-    });
+    }
+    );
 
 })
 
+function deleteInQualification(element) {
 
-// $(document).ready(function () {
+    if ((confirm("Are you sure you want to delete this row"))) {
+        $.ajax({
+            url: '/test.php',
+            type: "post",
+            data: { 'deleteID': element, 'action': 'delete' },
+            success: function (result) {
+                if ($.trim(result) == "deleted")
+                    window.location.href = window.location.href;
+            }
+        });
+    }
+    else return false;
+}
 
-//     // var PostData = <?php echo json_encode($_POST); ?>;
-//     table = $('#example').DataTable({
-//         fixedHeader: true,
-//         "ajax": {
-//             url: '/test.php', // json datasource
-//             type: "POST",  // type of method  , by default would be get
-//             error: function (msg) {  // error handling code
-//                 console.log(msg);
-//             },
-//         },
-//         // "bsort":false,
-//         "searching": true,
-//         "bProcessing": true,
-//         // "language": {
-//         //     processing: '<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span> '
-//         // },
-//         "serverSide": true,
-//         // "order": [[6, "desc"]],
-//         aLengthMenu: [[100, 500, 1000, 2000, 3000], [100, 500, 1000, 2000, 3000]]
-//     });
-//     // table.on('draw', function () {
-//     //     $("#total_rows").text($("#bankruptcy_table_info").text().substring($("#bankruptcy_table_info").text().lastIndexOf("of ") + 3, $("#bankruptcy_table_info").text().lastIndexOf(" entries")));
-//     // });
-// }); 
+
+
