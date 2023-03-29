@@ -8,7 +8,7 @@ $.ajaxSetup({
 
 if ($("input[name=uname]").val().length !== 0 && $("input[name=email]").val().length !== 0) {
     setTimeout(function () {
-        window.location.href = '/php/display.php';
+        window.location.href = '/php/datatable.php';
     }, 1000);
 }
 
@@ -23,7 +23,7 @@ function submit() {
         success: function (msg) {
 
             if ($.trim(msg) == 'success')
-                window.location.href = '/php/display.php';
+                window.location.href = '/php/datatable.php';
             if ($.trim(msg).length == 0) {
                 $('.session').css('display', 'block');
                 $('.session').text("data is incomplete");
@@ -73,7 +73,7 @@ function handleCredentialResponse(response) {
             data: "action=" + "loginPage" + "&loginBy=" + "glogin" + "&email=" + body.email,
             success: function (msg) {
                 if ($.trim(msg) == "success")
-                    window.location.href = "/php/display.php";
+                    window.location.href = "/php/datatable.php";
                 else
                     window.location.href = "/newIndex.php";
             }

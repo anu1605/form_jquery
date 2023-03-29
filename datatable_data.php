@@ -2,9 +2,27 @@
 
 <?php
 
+include("php/connectConfig.php");
+
 use function PHPSTORM_META\type;
 
 session_start();
+
+$destroy = false;
+if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
+    $post_id = $_SESSION['id'];
+    $user_exist = $conn->query("SELECT * FROM table_form WHERE post_id = $post_id");
+    if (!($user_exist->num_rows > 0)) {
+        session_unset();
+        session_destroy();
+        if (isset($_COOKIE['id']) && !empty($_COOKIE['id'])) {
+            setcookie('id', '', time() - 3600, '/');
+        }
+
+        $destroy = true;
+    }
+} else
+    $destroy = true;
 
 
 if (isset($_COOKIE['id']) && !empty($_COOKIE['id'])) {
@@ -12,7 +30,6 @@ if (isset($_COOKIE['id']) && !empty($_COOKIE['id'])) {
 }
 
 
-include("php/connectConfig.php");
 
 if (isset($_POST['action']) && $_POST['action'] == 'delete') {
     $post_id = $_POST['deleteID'];
@@ -24,7 +41,7 @@ $length = $_POST['length'];
 
 if (isset($_POST['search']['value']) && $_POST['search']['value'] != '')
     $search_item = $_POST['search']['value'];
-$totalRecords = $conn->query("SELECT * FROM table_form WHERE firstname like '%$search_item%' OR lastname like '%$search_item%' OR email like '%$search_item%' OR gender like '%$search_item%' OR hobbies like '%$search_item%' OR subject like '%$search_item%' OR about_yourself like '%$search_item%' OR image_files like '%$search_item%' OR date like '%$search_item%'")->num_rows;
+$totalRecords = $conn->query("SELECT * FROM table_form WHERE firstname like '%$search_item%' OR lastname like '%$search_item%' OR email like '%$search_item%' OR gender like '%$search_item%' OR hobbies like '%$search_item%' OR subject like '%$search_item%' OR about_yourself like '%$search_item%' OR image_files like '%$search_item%' OR date like '%$search_item%' ")->num_rows;
 
 
 $start = $_POST['start'];
@@ -40,7 +57,7 @@ if (isset($_POST['order']['0']['column'])  && isset($_POST['order']['0']['dir'])
     $order_item = $_POST['columns'][$order]['name'];
     $direction = $_POST['order']['0']['dir'];
 }
-$query = $conn->query("SELECT * FROM table_form WHERE (firstname like '%$search_item%' OR lastname like '%$search_item%' OR email like '%$search_item%' OR gender like '%$search_item%' OR hobbies like '%$search_item%' OR subject like '%$search_item%' OR about_yourself like '%$search_item%' OR image_files like '%$search_item%' OR date like '%$search_item%') OR (post_id IN (SELECT post_id FROM table_form)) ORDER BY  $order_item $direction  LIMIT $start , $limit");
+$query = $conn->query("SELECT * FROM table_form WHERE (firstname like '%$search_item%' OR lastname like '%$search_item%' OR email like '%$search_item%' OR gender like '%$search_item%' OR hobbies like '%$search_item%' OR subject like '%$search_item%' OR about_yourself like '%$search_item%' OR image_files like '%$search_item%' OR date like '%$search_item%')  ORDER BY  $order_item $direction  LIMIT $start , $limit");
 
 $array = [];
 
@@ -53,19 +70,6 @@ while ($row = $query->fetch_assoc()) {
 
 $json = json_encode(array("data" => $array));
 
-$columns = array(
-    0 => 'firstname',
-    1 => 'lastname',
-    2 => 'email',
-    3 => 'gender',
-    4 => 'hobbies',
-    5 => 'subject',
-    6 => 'about_yourself',
-    7 => 'image_files',
-    8 => 'password',
-    9 => 'date',
-    10 => 'edited_at'
-);
 
 
 
@@ -75,11 +79,14 @@ $json_data = array(
     "start"           => intval($_POST['start']),
     "recordsTotal"    => intval($totalRecords),
     "recordsFiltered" => intval($totalRecords),
-    "data"            => $array
+    "data"            => $array,
+    "destroy"        => $destroy
+
 
 );
 
 echo json_encode(utf8ize($json_data));
+
 
 function utf8ize($d)
 {

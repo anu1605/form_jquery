@@ -20,3 +20,14 @@ a.edit{
     color: white;
     background-color: #0954386d;
 }
+.clear_filter,a.logout {
+    width: 10%;
+    border: 2px solid darkblue;
+    color: darkblue;
+    background-color: white;
+    justify-self: center;
+    height: 1.8rem;
+    font-size: 1.2rem;
+    margin: 2rem 0;
+    border-radius: 20px;
+}

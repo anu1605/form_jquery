@@ -16,25 +16,19 @@
 
 
     <script></script>
-    <script src="/script/datatable.js"></script>
+    <script src="/script/qualification_datatable.js"></script>
 </head>
 
 <body>
     <h1>Display Form Information</h1><br>
-    <a class="qualification_anchor" href="/php/qualification_datatable.php">Click to see Qualifications Details</a>
-    <a href="javascript:void(0);" class="logout" onclick="logout()">Logout</a>
     <table id="example" class="display" style="width:100%">
         <thead style="background-color: white;">
             <tr>
                 <th>firstname</th>
-                <th>lastname</th>
-                <th>email</th>
-                <th>gender</th>
-                <th>hobbies</th>
-                <th>subject</th>
-                <th>about_yourself</th>
-                <th>image_files</th>
-                <th>date</th>
+                <th>education</th>
+                <th>branch</th>
+                <th>year</th>
+                <th>marks</th>
                 <th>button</th>
             </tr>
         </thead>

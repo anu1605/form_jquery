@@ -8,29 +8,20 @@ $(document).ready(function () {
 
 
         "ajax": {
-            "url": "/datatable_data.php",
+            "url": "/datatable_qualification_data.php",
             "type": "post",
-            "success": function (msg) {
-                if ($.trim(msg)) {
-                    alert(table.ajax);
-                    table.destroy();
-                    window.location.href = "/php/login.php";
-                }
+            "success": function () {
+                alert(msg);
             }
 
         },
 
         "columnDefs": [
             { "name": 'firstname', "targets": 0 },
-            { "name": 'lastname', "targets": 1 },
-            { "name": 'email', "targets": 2 },
-            { "name": 'gender', "targets": 3 },
-            { "name": 'hobbies', "targets": 4, 'orderable': false },
-            { "name": 'subject', "targets": 5, 'orderable': false },
-            { "name": 'about_yourself', "targets": 6, 'orderable': false },
-            { "name": 'image_files', "targets": 7, 'orderable': false },
-            { "name": 'date', "targets": 8 },
-            { "name": 'button', "targets": 9, 'orderable': false }
+            { "name": 'education', "targets": 1, 'orderable': false },
+            { "name": 'branch', "targets": 2 },
+            { "name": 'year', "targets": 3 },
+            { "name": 'marks', "targets": 4 }
 
         ],
         "info": true,
@@ -49,7 +40,7 @@ function deleteInQualification(element) {
 
     if ((confirm("Are you sure you want to delete this row"))) {
         $.ajax({
-            url: '/datatable_data.php',
+            url: '/datatable_qualification_data.php',
             type: "post",
             data: { 'deleteID': element, 'action': 'delete' },
             success: function (result) {
