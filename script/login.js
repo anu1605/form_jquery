@@ -1,4 +1,115 @@
+$('#exampleModal').on('shown.bs.modal', function () {
+    $('.btn').trigger('focus');
 
+})
+
+if ($('.token').attr('id') != '') {
+    console.log('show');
+    $('.btn').click();
+    $('label[for=new_pwd]').css('display', 'block');
+    $('label[for=cnfm_pwd]').css('display', 'block');
+    $('#new_pwd').css('display', 'block');
+    $('#cnfm_pwd').css('display', 'block');
+}
+
+$('.btn').css('background-color', 'transparent');
+$('.btn').css('color', 'blue');
+$('.btn').css('box-shadow', 'none');
+$('.btn').css('border', 'none');
+$('.btn').css('outline', 'none');
+$('label').css('margin-bottom', '0');
+$('h5').css('color', '#04AA6D');
+$('.btn').css('color', '#04AA6D');
+
+$('.btn-submit').click(function () {
+    if (!(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($("#email").val()))) {
+        $('#err_msg').text('Enter Valid Email');
+        return false;
+    }
+    else if ($('.token').attr('id') == '') {
+        $('#err_msg').text('')
+        $.ajax({
+            url: "/php/checkLoginInfo.php",
+            type: "post",
+            data: { 'email': $('#email').val(), 'action': 'forgotpwd' },
+            success: function (msg) {
+                if ($.trim(msg) == "notRegistered") {
+                    $('#err_msg').text("This Email is not Registered");
+                }
+                else {
+
+                    $.ajax({
+                        url: '/php/sendMail.php',
+                        type: 'post',
+                        data: { 'action': 'mailing', 'email': $('#email').val(), 'token': tokenGenerator() }
+
+                    })
+
+
+                    $('.modal-body').html("<p style = 'color:#04AA6D;' >A verification link has been sent to your account</p>");
+
+                    $('.close').click(function () {
+                        $('.modal-body').html(' <input type="text" name="email" class="email" id="email" value="" placeholder="jhondoe@gmail.com"><p class="err_msg" id="err_msg"></p>');
+                    })
+                }
+
+            }
+        })
+    }
+    else {
+        if (!(/[A-Z])/.test($('.new_pwd')))) {
+            $('#err_msg').text('Enter Valid password');
+            return;
+        }
+        if ($('.new_pwd').val().length != $('.cnfm_pwd').val().length) {
+            $('#err_msg').text('Confirm password is Wrong');
+            return;
+        }
+
+        for (var i = 0; i < $('.new_pwd').val().length; i++) {
+            if ($('.new_pwd').val()[i] != $('.cnfm_pwd').val()[i]) {
+                $('#err_msg').text('Confirm password is Wrong');
+                return;
+            }
+        }
+
+        console.log(check);
+    }
+
+}
+
+)
+
+function tokenGenerator() {
+    var lower = "abcdefghijklmnopqrstuvwxyz";
+    var upper = lower.toUpperCase();
+    var numbers = "0123456789";
+    var special = "@$%^&*.<>?/#";
+    var picker = [lower, upper, numbers, special];
+    var used = [];
+
+    var string = "";
+    for (i = 0; i < 6; i++) {
+        var index = Math.floor(Math.random() * picker.length);
+        if (used.length != picker.length) {
+            while (used.indexOf(index) != -1) {
+                index = Math.floor(Math.random() * picker.length);
+            }
+            used.push(index);
+        }
+        else used.splice(0, -1);
+
+        string += picker[index].charAt(Math.floor(Math.random() * picker[index].length));
+    }
+    console.log(string);
+
+    return string;
+
+}
+
+$(document).mousedown(function () {
+
+})
 
 $.ajaxSetup({
     cache: false
@@ -6,7 +117,7 @@ $.ajaxSetup({
 
 
 
-if ($("input[name=uname]").val().length !== 0 && $("input[name=email]").val().length !== 0 || $('.session').attr('id') != "null") {
+if ($("input[name=uname]").val().length !== 0 && $("input[name=email]").val().length !== 0 || !$.isEmptyObject(($('.session').attr('id')))) {
     setTimeout(function () {
         window.location.href = '/php/datatable.php';
     }, 1000);
@@ -38,7 +149,7 @@ function submit() {
 }
 
 $(document).mousedown(function () {
-
+    $('#err_msg').text('');
     $('.session').css('display', 'none');
 
 })

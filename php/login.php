@@ -15,6 +15,10 @@ if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
     $passd = $info['password'];
 } else $post_id = '';
 
+if (isset($_GET['token']) && $_GET['token'] != '') {
+    $token = $_GET['token'];
+    $email = $conn->query(("SELECT email FROM table_form WHERE token='$token'"))->fetch_assoc()['email'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -31,6 +35,11 @@ if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
     <link rel="shortcut icon" href="#">
     <title>Document</title>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 </head>
 
@@ -70,10 +79,43 @@ if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
         </div>
 
 
+
         <div id="buttonDiv">
         </div>
 
-        <a class="frgt_password" href="">forgot password?</a>
+        <!-- <div class="forgot"><a class="forgot_pass" href="#">forgot password?</a></div> -->
+        <!-- Button trigger modal -->
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            forgot password?
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Enter your Email</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="email">Email</label>
+                        <input type="text" name="email" class="email" id="email" value="<?php echo isset($_GET['token']) ? $email : ''; ?>" <?php echo isset($_GET['token']) ? 'disabled' : ''; ?> placeholder="jhondoe@gmail.com">
+                        <label style="display: none;" for="new_pwd">New Password</label>
+                        <input style="display: none;" type="password" name="new_pwd" id="new_pwd" value="">
+                        <label style="display: none;" for="cnfm_pwd">Confirm Password</label>
+                        <input style="display: none;" type="password" name="cnfm_pwd" id="cnfm_pwd" value="">
+                        <p class="err_msg" id="err_msg"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary close" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary btn-submit">submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- FACEBOOK BUTTON -->
         <!-- <div id="spinner" style="
@@ -93,7 +135,8 @@ if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
         <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v16.0&appId=190632410356156&autoLogAppEvents=1" nonce="5102279v"></script> -->
         <!-- <div class="fb-login-button" data-width="" data-size="" data-button-type="" data-layout="" data-auto-logout-link="false" data-use-continue-as="false"></div> -->
     </form>
-    <p style="display:none;" class="session" id="<?php echo isset($_SESSION['id']) ?  $_SESSION['id'] : 'null'; ?>"></p>
+    <p style="display:none;" class="session" id="<?php echo isset($_SESSION['id']) ?  $_SESSION['id'] : ''; ?>"></p>
+    <p style="display:none;" class="token" id="<?php echo isset($_GET['token']) ? $_GET['token'] : ''; ?>"></p>
     <script src="/script/login.js"></script>
 </body>
 
