@@ -6,7 +6,7 @@ $.ajaxSetup({
 
 
 
-if ($("input[name=uname]").val().length !== 0 && $("input[name=email]").val().length !== 0) {
+if ($("input[name=uname]").val().length !== 0 && $("input[name=email]").val().length !== 0 || $('.session').attr('id') != "null") {
     setTimeout(function () {
         window.location.href = '/php/datatable.php';
     }, 1000);

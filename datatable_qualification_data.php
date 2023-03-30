@@ -10,18 +10,7 @@ use function PHPSTORM_META\type;
 
 
 
-echo $_SESSION['id'];
-if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
-    $post_request_id = $_SESSION['id'];
-    $user_exist = $conn->query("SELECT * FROM Qualification_table WHERE post_request_id = $post_request_id");
-    if (!($user_exist->num_rows > 0))
-        exit("logout");
-} else
-    exit("logout");
 
-if (isset($_COOKIE['id']) && !empty($_COOKIE['id'])) {
-    $post_request_id = $_COOKIE['id'];
-}
 
 if (isset($_POST['action']) && $_POST['action'] == 'delete') {
     $post_request_id = $_POST['deleteID'];

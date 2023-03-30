@@ -1,5 +1,6 @@
 <?php
 include("connectConfig.php");
+
 session_start();
 if (isset($_COOKIE['id']) && !empty($_COOKIE['id']))
     $_SESSION['id'] = $_COOKIE['id'];
@@ -72,6 +73,8 @@ if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
         <div id="buttonDiv">
         </div>
 
+        <a class="frgt_password" href="">forgot password?</a>
+
         <!-- FACEBOOK BUTTON -->
         <!-- <div id="spinner" style="
         background: #4267b2;
@@ -90,7 +93,7 @@ if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
         <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v16.0&appId=190632410356156&autoLogAppEvents=1" nonce="5102279v"></script> -->
         <!-- <div class="fb-login-button" data-width="" data-size="" data-button-type="" data-layout="" data-auto-logout-link="false" data-use-continue-as="false"></div> -->
     </form>
-    <p style="display:none;" class="session" id="<?php echo  $_SESSION['id']; ?>"></p>
+    <p style="display:none;" class="session" id="<?php echo isset($_SESSION['id']) ?  $_SESSION['id'] : 'null'; ?>"></p>
     <script src="/script/login.js"></script>
 </body>
 

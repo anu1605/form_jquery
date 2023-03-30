@@ -126,3 +126,8 @@ justify-self: center;
 margin-top: 1rem;
 margin-bottom: 2rem;
 }
+
+.frgt_password{
+  text-decoration: none;
+  align-self: center;
+}

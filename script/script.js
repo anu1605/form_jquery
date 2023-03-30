@@ -235,7 +235,7 @@ function submit(id) {
     data: $('#information').serialize() + '&ID=' + id + '&action=' + 'RegistrationofUsers',
     success: function (result) {
 
-      window.location.href = "/php/display.php";
+      window.location.href = "/php/datatable.php";
     }
   });
 }

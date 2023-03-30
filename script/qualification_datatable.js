@@ -10,9 +10,6 @@ $(document).ready(function () {
         "ajax": {
             "url": "/datatable_qualification_data.php",
             "type": "post",
-            "success": function () {
-                alert(msg);
-            }
 
         },
 

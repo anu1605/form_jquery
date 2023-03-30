@@ -6,25 +6,8 @@ include("php/connectConfig.php");
 
 use function PHPSTORM_META\type;
 
+
 session_start();
-
-$destroy = false;
-if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
-    $post_id = $_SESSION['id'];
-    $user_exist = $conn->query("SELECT * FROM table_form WHERE post_id = $post_id");
-    if (!($user_exist->num_rows > 0)) {
-        session_unset();
-        session_destroy();
-        if (isset($_COOKIE['id']) && !empty($_COOKIE['id'])) {
-            setcookie('id', '', time() - 3600, '/');
-        }
-
-        $destroy = true;
-    }
-} else
-    $destroy = true;
-
-
 if (isset($_COOKIE['id']) && !empty($_COOKIE['id'])) {
     $post_id = $_COOKIE['id'];
 }
@@ -80,8 +63,6 @@ $json_data = array(
     "recordsTotal"    => intval($totalRecords),
     "recordsFiltered" => intval($totalRecords),
     "data"            => $array,
-    "destroy"        => $destroy
-
 
 );
 

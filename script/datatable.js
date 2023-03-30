@@ -10,13 +10,6 @@ $(document).ready(function () {
         "ajax": {
             "url": "/datatable_data.php",
             "type": "post",
-            "success": function (msg) {
-                if ($.trim(msg)) {
-                    alert(table.ajax);
-                    table.destroy();
-                    window.location.href = "/php/login.php";
-                }
-            }
 
         },
 
@@ -44,6 +37,7 @@ $(document).ready(function () {
 
 
 })
+
 
 function deleteInQualification(element) {
 

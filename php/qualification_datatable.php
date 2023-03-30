@@ -1,3 +1,19 @@
+<?php
+session_start();
+include("connectConfig.php");
+if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
+    $post_request_id = $_SESSION['id'];
+    $user_exist = $conn->query("SELECT * FROM table_form WHERE post_id = $post_request_id");
+    if (!($user_exist->num_rows > 0))
+        header("location: login.php");
+} else
+    header("location: login.php");
+
+if (isset($_COOKIE['id']) && !empty($_COOKIE['id'])) {
+    $post_request_id = $_COOKIE['id'];
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
