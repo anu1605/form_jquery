@@ -8,7 +8,6 @@ if (isset($_POST['action']) && $_POST['action'] == 'mailing') {
     $email = $_POST['email'];
     $token = $_POST['token'];
     $message = '
-
 <!DOCTYPE html>
 <html lang="en">
 

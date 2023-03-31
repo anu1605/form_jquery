@@ -105,9 +105,9 @@ enum -->
   // sql query
   if (isset($_GET['ID'])) {
     $get_id = $_GET['ID'];
-    $sql = "UPDATE table_form SET firstname = '$firstname', lastname= '$lastname',email='$email',gender='$gender',hobbies ='$hobbies',subject='$subject',about_yourself='$about', image_files='$imagePathString',password= MD5('" . $pwd . "'), date='$date'  WHERE post_id= $get_id";
+    $sql = "UPDATE table_form SET firstname = '$firstname', lastname= '$lastname',email='$email',gender='$gender',hobbies ='$hobbies',subject='$subject',about_yourself='$about', image_files='$imagePathString',password= MD5(' $pwd '), date='$date'  WHERE post_id= $get_id";
   } else
-    $sql = "INSERT INTO table_form (firstname, lastname,email,gender,hobbies,subject,about_yourself	, image_files ,password, date ) VALUES ('$firstname', '$lastname','$email', '$gender', '$hobbies', '$subject', '$about', '$imagePathString'  ,MD5('" . $pwd . "'),  '$date')";
+    $sql = "INSERT INTO table_form (firstname, lastname,email,gender,hobbies,subject,about_yourself	, image_files ,password, date ) VALUES ('$firstname', '$lastname','$email', '$gender', '$hobbies', '$subject', '$about', '$imagePathString'  ,MD5('$pwd '),  '$date')";
 
   $_SESSION['id'] = $conn->insert_id;
   if ($conn->query($sql)) {

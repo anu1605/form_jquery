@@ -4,12 +4,12 @@ $('#exampleModal').on('shown.bs.modal', function () {
 })
 
 if ($('.token').attr('id') != '') {
-    console.log('show');
     $('.btn').click();
     $('label[for=new_pwd]').css('display', 'block');
     $('label[for=cnfm_pwd]').css('display', 'block');
     $('#new_pwd').css('display', 'block');
     $('#cnfm_pwd').css('display', 'block');
+    $('#email').css('font-size', '0.7rem');
 }
 
 $('.btn').css('background-color', 'transparent');
@@ -22,7 +22,7 @@ $('h5').css('color', '#04AA6D');
 $('.btn').css('color', '#04AA6D');
 
 $('.btn-submit').click(function () {
-    if (!(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($("#email").val()))) {
+    if (!(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($("#emailRO").val()))) {
         $('#err_msg').text('Enter Valid Email');
         return false;
     }
@@ -31,7 +31,7 @@ $('.btn-submit').click(function () {
         $.ajax({
             url: "/php/checkLoginInfo.php",
             type: "post",
-            data: { 'email': $('#email').val(), 'action': 'forgotpwd' },
+            data: { 'email': $('#emailRO').val(), 'action': 'forgotpwd' },
             success: function (msg) {
                 if ($.trim(msg) == "notRegistered") {
                     $('#err_msg').text("This Email is not Registered");
@@ -41,7 +41,7 @@ $('.btn-submit').click(function () {
                     $.ajax({
                         url: '/php/sendMail.php',
                         type: 'post',
-                        data: { 'action': 'mailing', 'email': $('#email').val(), 'token': tokenGenerator() }
+                        data: { 'action': 'mailing', 'email': $('#emailRO').val(), 'token': tokenGenerator() }
 
                     })
 
@@ -49,7 +49,7 @@ $('.btn-submit').click(function () {
                     $('.modal-body').html("<p style = 'color:#04AA6D;' >A verification link has been sent to your account</p>");
 
                     $('.close').click(function () {
-                        $('.modal-body').html(' <input type="text" name="email" class="email" id="email" value="" placeholder="jhondoe@gmail.com"><p class="err_msg" id="err_msg"></p>');
+                        $('.modal-body').html(' <input type="text" name="emailRO" class="emailRO" id="emailRO" value="" placeholder="jhondoe@gmail.com"><p class="err_msg" id="err_msg"></p>');
                     })
                 }
 
@@ -57,23 +57,46 @@ $('.btn-submit').click(function () {
         })
     }
     else {
-        if (!(/[A-Z])/.test($('.new_pwd')))) {
+
+
+        if ((/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$ /.test($('#new_pwd').val()))) {
             $('#err_msg').text('Enter Valid password');
             return;
         }
-        if ($('.new_pwd').val().length != $('.cnfm_pwd').val().length) {
+
+        if ($('#new_pwd').val().length != $('#cnfm_pwd').val().length) {
             $('#err_msg').text('Confirm password is Wrong');
             return;
         }
 
-        for (var i = 0; i < $('.new_pwd').val().length; i++) {
-            if ($('.new_pwd').val()[i] != $('.cnfm_pwd').val()[i]) {
+        for (var i = 0; i < $('#new_pwd').val().length; i++) {
+            if ($('#new_pwd').val()[i] != $('#cnfm_pwd').val()[i]) {
                 $('#err_msg').text('Confirm password is Wrong');
                 return;
             }
         }
 
-        console.log(check);
+        // var email = ;
+
+        console.log($('#new_pwd').val());
+        console.log($('.emailP').val());
+        $.ajax({
+            url: "/php/setNewPass.php",
+            type: "post",
+            data: { 'pwd': $('#new_pwd').val(), 'action': 'setPass', 'email': $('#emailRO').val() },
+            success: function (msg) {
+                setTimeout(function () {
+                    if ($.trim(msg) == 'success')
+                        $('#err_msg').text('Success');
+
+
+                }, 1000)
+                window.location.href = '/php/login.php';
+
+            }
+        })
+
+
     }
 
 }
@@ -84,7 +107,7 @@ function tokenGenerator() {
     var lower = "abcdefghijklmnopqrstuvwxyz";
     var upper = lower.toUpperCase();
     var numbers = "0123456789";
-    var special = "@$%^&*.<>?/#";
+    var special = "@$%^&*.<>?/";
     var picker = [lower, upper, numbers, special];
     var used = [];
 
@@ -117,7 +140,7 @@ $.ajaxSetup({
 
 
 
-if ($("input[name=uname]").val().length !== 0 && $("input[name=email]").val().length !== 0 || !$.isEmptyObject(($('.session').attr('id')))) {
+if ($("input[name=email]").val().length !== 0 || !$.isEmptyObject(($('.session').attr('id')))) {
     setTimeout(function () {
         window.location.href = '/php/datatable.php';
     }, 1000);
@@ -127,10 +150,11 @@ function submit() {
     if (!checkEmail())
         return false;
 
+
     $.ajax({
         url: '/php/checkLoginInfo.php',
         type: 'post',
-        data: $('#loginPage').serialize() + '&action=' + 'loginPage' + "&loginBy=" + "form",
+        data: { 'action': 'loginPage', "loginBy": "form", 'email': $('#email').val(), 'psw': $('input[name=psw]').val() },
         success: function (msg) {
 
             if ($.trim(msg) == 'success')

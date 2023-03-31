@@ -1,37 +1,36 @@
-body{
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   display: flex;
   flex-direction: column;
   height: 100vh;
   justify-content: center;
   align-items: center;
+
 }
 
-form{
+form {
   display: grid;
 }
 
-label{
-  color: #04AA6D;
+label {
+  color: #04aa6d;
   font-size: 0.9rem;
   margin-bottom: 0.2rem;
   margin-top: 0.8rem;
-
 }
-input{
+input {
   margin-top: 0;
   border-radius: 10px;
   background-color: #ebfaf5;
   color: #01462cb0;
   outline: none;
-  font-size: 0.8rem;
- 
 }
-input:hover{
-  box-shadow: 0px 0px 10px -5px #04AA6D;
+input:hover {
+  box-shadow: 0px 0px 10px -5px #04aa6d;
 }
 
-input::placeholder{
+input::placeholder {
   color: #01462cb0;
   font-size: 0.8rem;
 }
@@ -39,118 +38,120 @@ input::placeholder{
 form {
   width: 25%;
   box-shadow: 0px 0px 10px 3px #dee9e5;
-  }
-  
-  /* Full-width inputs */
-  input[type=text], input[type=password] {
-    width: 100%;
-    padding: 8px 12px;
-    margin-bottom: 8px ;
-    display: inline-block;
-    border: none;
-    box-sizing: border-box;
-  }
-  
-  /* Set a style for all buttons */
-  .login ,button{
-    background-color: #04AA6D;
-    text-decoration: none;
-    color: white;
-    padding: 6px 12px;
-    margin: 6px 0px;
-    border: none;
-    cursor: pointer;
-    width: fit-content;
-    justify-self: center;
-  }
- 
-  
-  /* Add a hover effect for buttons */
-  .login:hover {
-    opacity: 0.7;
-    color: white;
-    text-decoration: none;
-  }
-  
-
-  
-  /* Center the avatar image inside this container */
-  .imgcontainer {
-    text-align: center;
-    margin: 24px 0 12px 0;
-  }
-  
-  /* Avatar image */
-  img.avatar {
-    width: 25%;
-    border-radius: 50%;
-  }
-  
-  /* Add padding to containers */
-  .container {
-    padding: 16px;
-    display: grid;
-  }
-
-  .container:nth-last-child(1){
-    padding: 5px 16px;
-    display: grid;
-  }
-  
-  /* The "Forgot password" text */
-  span.psw {
-    float: right;
-    padding-top: 16px;
-  }
-  
-  /* Change styles for span and cancel button on extra small screens */
-  @media screen and (max-width: 300px) {
-    span.psw {
-      display: block;
-      float: none;
-    }
-
-  }
-  .session{
-    color: red;
-    text-align: center;
-    align-self: center;
-    justify-self: center;
-  }
-
-  .break{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  hr{
-    width: 100%;
-    height: 0;
-    margin: 0 0.5rem;
-  }
-
-#buttonDiv{
-width: fit-content;
-justify-self: center;
-margin-top: 1rem;
-margin-bottom: 0rem;
 }
 
-.forgot{
+/* Full-width inputs */
+input[type="text"],
+input[type="password"] {
+  color: #01462cb0;
+  width: 100%;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  display: inline-block;
+  border: none;
+  box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+.login,
+button {
+
+  background-color: #04aa6d;
+  text-decoration: none;
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  cursor: pointer;
+  width: fit-content;
+  justify-self: center;
+}
+
+a.login{
+    margin-top: 1.5rem;
+}
+
+/* Add a hover effect for buttons */
+.login:hover {
+  opacity: 0.7;
+  color: white;
+  text-decoration: none;
+}
+
+/* Center the avatar image inside this container */
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+/* Avatar image */
+img.avatar {
+  width: 25%;
+  border-radius: 50%;
+}
+
+/* Add padding to containers */
+.container {
+  padding: 16px;
+  display: grid;
+}
+
+.container:nth-last-child(1) {
+  padding: 5px 16px;
+  display: grid;
+}
+
+/* The "Forgot password" text */
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+    display: block;
+    float: none;
+  }
+}
+.session {
+  color: red;
+  text-align: center;
+  align-self: center;
+  justify-self: center;
+}
+
+.break {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+hr {
+  width: 100%;
+  height: 0;
+  margin: 0 0.5rem;
+}
+
+#buttonDiv {
+  width: fit-content;
+  justify-self: center;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.forgot {
   display: grid;
   margin-bottom: 2rem;
 }
 
-button.btn{
+button.btn {
   margin-bottom: 2rem;
   font-size: 0.8rem;
-
 }
-.email{
+.email {
   margin-top: 1rem;
 }
 
-.err_msg{
+.err_msg {
   width: 100%;
   margin: 0;
   height: 1rem;

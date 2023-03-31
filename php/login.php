@@ -10,15 +10,15 @@ if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
     $post_id = $_SESSION['id'];
     $query = $conn->query("SELECT * FROM table_form WHERE post_id = '$post_id'");
     $info = $query->fetch_assoc();
-    $usrname = $info['firstname'];
     $email = $info['email'];
     $passd = $info['password'];
 } else $post_id = '';
 
-if (isset($_GET['token']) && $_GET['token'] != '') {
+if (isset($_GET['token'])) {
     $token = $_GET['token'];
     $email = $conn->query(("SELECT email FROM table_form WHERE token='$token'"))->fetch_assoc()['email'];
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -50,15 +50,15 @@ if (isset($_GET['token']) && $_GET['token'] != '') {
         </div>
 
         <div class="container">
-            <label for="uname">
+            <!-- <label for="uname">
                 Username
             </label>
-            <input type="text" placeholder="Enter Username" name="uname" value="<?php echo isset($_SESSION['id']) && !empty($_SESSION['id']) ?  $usrname : ''; ?>" required>
+            <input type="text" placeholder="Enter Username" name="uname" value="" required> -->
 
             <label for="email">
                 Email
             </label>
-            <input type="text" placeholder="Enter Email" name="email" value="<?php echo isset($_SESSION['id']) && !empty($_SESSION['id']) ?  $email : ''; ?>" required>
+            <input type="text" placeholder="Enter Email" name="email" id="email" value="<?php echo isset($_SESSION['id']) && !empty($_SESSION['id']) ?  $email : ''; ?>" required>
             <label for="psw">
                 Password
             </label>
@@ -101,8 +101,8 @@ if (isset($_GET['token']) && $_GET['token'] != '') {
                         </button>
                     </div>
                     <div class="modal-body">
-                        <label for="email">Email</label>
-                        <input type="text" name="email" class="email" id="email" value="<?php echo isset($_GET['token']) ? $email : ''; ?>" <?php echo isset($_GET['token']) ? 'disabled' : ''; ?> placeholder="jhondoe@gmail.com">
+                        <label for="emailRO">Email</label>
+                        <input type="text" name="emailRO" class="emailRO" id="emailRO" value="<?php echo isset($_GET['token']) ? $email : ''; ?>" <?php echo isset($_GET['token']) ? 'disabled' : ''; ?> placeholder="jhondoe@gmail.com">
                         <label style="display: none;" for="new_pwd">New Password</label>
                         <input style="display: none;" type="password" name="new_pwd" id="new_pwd" value="">
                         <label style="display: none;" for="cnfm_pwd">Confirm Password</label>
@@ -137,6 +137,7 @@ if (isset($_GET['token']) && $_GET['token'] != '') {
     </form>
     <p style="display:none;" class="session" id="<?php echo isset($_SESSION['id']) ?  $_SESSION['id'] : ''; ?>"></p>
     <p style="display:none;" class="token" id="<?php echo isset($_GET['token']) ? $_GET['token'] : ''; ?>"></p>
+    <p style="display:none;" class="emailP" id="<?php echo isset($_GET['token']) ? $email : ''; ?>"><?php echo $email ?></p>
     <script src="/script/login.js"></script>
 </body>
 
