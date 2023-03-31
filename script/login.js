@@ -87,11 +87,11 @@ $('.btn-submit').click(function () {
             success: function (msg) {
                 setTimeout(function () {
                     if ($.trim(msg) == 'success')
-                        $('#err_msg').text('Success');
 
 
+                        window.location.href = '/php/login.php';
                 }, 1000)
-                window.location.href = '/php/login.php';
+                $('#err_msg').text('Success');
 
             }
         })
