@@ -42,14 +42,13 @@ if (isset($_POST['action']) && $_POST['action'] == 'mailing') {
 </body>
 
 </html>
-
-    ';
-
-    echo $message;
+';
     $headers = "MIME-Version: 1.0" . "\r\n";
     $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
     $headers .= 'From: <webmaster@example.com>' . "\r\n";
 
     $query = $conn->query("UPDATE table_form SET token = '$token' WHERE email = '$email'");
+    echo $message;
+
     mail("$email", "verification",  $message, $headers);
 }

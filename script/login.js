@@ -1,3 +1,21 @@
+toastr.options = {
+    "closeButton": false,
+    "debug": false,
+    "newestOnTop": false,
+    "progressBar": false,
+    "positionClass": "toast-bottom-center",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+}
+
 $('#exampleModal').on('shown.bs.modal', function () {
     $('.btn').trigger('focus');
 
@@ -23,18 +41,17 @@ $('.btn').css('color', '#04AA6D');
 
 $('.btn-submit').click(function () {
     if (!(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($("#emailRO").val()))) {
-        $('#err_msg').text('Enter Valid Email');
+        toastr.error("Enter Valid Email");
         return false;
     }
     else if ($('.token').attr('id') == '') {
-        $('#err_msg').text('')
         $.ajax({
             url: "/php/checkLoginInfo.php",
             type: "post",
             data: { 'email': $('#emailRO').val(), 'action': 'forgotpwd' },
             success: function (msg) {
                 if ($.trim(msg) == "notRegistered") {
-                    $('#err_msg').text("This Email is not Registered");
+                    toastr.error("This Email is not Registered");
                 }
                 else {
 
@@ -59,39 +76,39 @@ $('.btn-submit').click(function () {
     else {
 
 
-        if ((/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$ /.test($('#new_pwd').val()))) {
-            $('#err_msg').text('Enter Valid password');
+        if (!(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/.test($('#new_pwd').val()))) {
+            toastr.error('Enter Valid password');
             return;
         }
 
         if ($('#new_pwd').val().length != $('#cnfm_pwd').val().length) {
-            $('#err_msg').text('Confirm password is Wrong');
+            toastr.error('Confirm password is Wrong');
             return;
         }
 
         for (var i = 0; i < $('#new_pwd').val().length; i++) {
             if ($('#new_pwd').val()[i] != $('#cnfm_pwd').val()[i]) {
-                $('#err_msg').text('Confirm password is Wrong');
+                toastr.error('Confirm password is Wrong');
                 return;
             }
         }
 
         // var email = ;
 
-        console.log($('#new_pwd').val());
-        console.log($('.emailP').val());
+
         $.ajax({
             url: "/php/setNewPass.php",
             type: "post",
             data: { 'pwd': $('#new_pwd').val(), 'action': 'setPass', 'email': $('#emailRO').val() },
             success: function (msg) {
+                toastr.success('Success');
                 setTimeout(function () {
                     if ($.trim(msg) == 'success')
 
 
                         window.location.href = '/php/login.php';
-                }, 1000)
-                $('#err_msg').text('Success');
+                }, 3000)
+
 
             }
         })
@@ -160,23 +177,21 @@ function submit() {
             if ($.trim(msg) == 'success')
                 window.location.href = '/php/datatable.php';
             if ($.trim(msg).length == 0) {
-                $('.session').css('display', 'block');
-                $('.session').text("data is incomplete");
+                toastr.error("Enter valid login information");
             }
             if ($.trim(msg) == 'invalid') {
-                $('.session').css('display', 'block');
-                $('.session').text("invalid login information");
+                toastr.error("Invalid Email or Password");
             }
         }
 
     });
 }
 
-$(document).mousedown(function () {
-    $('#err_msg').text('');
-    $('.session').css('display', 'none');
+// $(document).mousedown(function () {
+//     $('#err_msg').text('');
+//     $('.session').css('display', 'none');
 
-})
+// })
 
 $("input[name=email]").blur(checkEmail)
 
@@ -184,8 +199,7 @@ $("input[name=email]").blur(checkEmail)
 
 function checkEmail() {
     if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test($('input[name=email').val()) && $('input[name=email').val() != '') {
-        $('.session').css('display', 'block');
-        $('.session').text("invalid email");
+        toastr.error("invalid email");
         return false;
     }
     return true;
