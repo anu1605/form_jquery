@@ -68,6 +68,29 @@ function logout() {
     })
 }
 
+function getLocation(id) {
+    $.ajax({
+        url: "/php/getLocation.php",
+        type: "post",
+        data: { 'post_id': id, 'action': 'location' },
+        success: function (location) {
+            var loc = $.trim(location).split(',');
+            console.log(loc);
+            function initMap() {
+                const myLatLng = { lat: -25.363, lng: 131.044 };
+                const map = new google.maps.Map($("#map"), {
+                    zoom: 4,
+                    center: myLatLng,
+                });
 
+                new google.maps.Marker({
+                    position: myLatLng,
+                    map,
+                    title: "Hello World!",
+                });
+            }
 
-
+            window.initMap = initMap;
+        }
+    })
+}

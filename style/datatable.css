@@ -58,4 +58,16 @@ a.edit{
     background-color: #0954386d;
 }
 
+.location{
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+    border-radius: 10px;
+    background-color: rgba(3, 58, 168, 0.734);
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
 
+#map {
+    height: 100%;
+  }

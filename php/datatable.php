@@ -37,6 +37,7 @@ if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/fixedheader/3.3.2/js/dataTables.fixedHeader.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 </head>
 
 <body>
@@ -55,6 +56,7 @@ if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
                 <th>about_yourself</th>
                 <th>image_files</th>
                 <th>date</th>
+                <th>location</th>
                 <th>button</th>
             </tr>
         </thead>
@@ -65,7 +67,11 @@ if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
 
 
     </table>
+    <div id="map"></div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8CR69C57TIBVPw2fYp7cOaWzK_jP42lg&callback=initMap&v=weekly" defer></script>
     <script src="/script/datatable.js"></script>
+
+
 </body>
 
 </html>

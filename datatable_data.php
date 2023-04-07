@@ -47,7 +47,9 @@ $array = [];
 
 
 while ($row = $query->fetch_assoc()) {
-    array_push($array, [$row['firstname'], $row['lastname'], $row['email'], $row['gender'], $row['hobbies'], $row['subject'], $row['about_yourself'], $row['image_files'], $row['date'], ' <div class="action_btn"><a class="delete" onclick="deleteInQualification( ' . $row['post_id'] . ')">Delete</a> <a class="edit"  href="/newIndex.php?ID= ' . $row['post_id'] . '">Edit</a></div>']);
+    $id = $row['post_id'];
+    array_push($array, [$row['firstname'], $row['lastname'], $row['email'], $row['gender'], $row['hobbies'], $row['subject'], $row['about_yourself'], $row['image_files'], $row['date'], '    <div>
+    <a href="javascript:void(0);" class="location" id= "' . $id . '" onclick="getLocation(' . $id . ')">see location</a></div>', ' <div class="action_btn"><a class="delete" onclick="deleteInQualification( ' . $row['post_id'] . ')">Delete</a> <a class="edit"  href="/newIndex.php?ID= ' . $row['post_id'] . '">Edit</a></div>']);
 }
 
 
