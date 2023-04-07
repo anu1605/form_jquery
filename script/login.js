@@ -164,7 +164,17 @@ if ($("input[name=email]").val().length !== 0 || !$.isEmptyObject(($('.session')
 }
 
 function submit() {
-    if (!checkEmail())
+    if ($.isEmptyObject($('#email').val())) {
+        toastr.error('email field is empty');
+        setTimeout(function () {
+            if ($.isEmptyObject($(':password').val()))
+                toastr.error('password field is empty');
+        }, 200);
+        return false;
+    }
+
+
+    else if (!checkEmail())
         return false;
 
 
@@ -176,11 +186,17 @@ function submit() {
 
             if ($.trim(msg) == 'success')
                 window.location.href = '/php/datatable.php';
-            if ($.trim(msg).length == 0) {
-                toastr.error("Enter valid login information");
-            }
-            if ($.trim(msg) == 'invalid') {
-                toastr.error("Invalid Email or Password");
+            // if ($.trim(msg) == 'email') {
+            //     toastr.error("email field is empty");
+            // }
+            // if ($.trim(msg) == 'psw') {
+            //     toastr.error("password field is empty");
+            // }
+            // if ($.trim(msg) == 'psw') {
+            //     toastr.error("password field is empty");
+            // }
+            if ($.trim(msg) == 'incorrect') {
+                toastr.error("Incorrect Email or Password");
             }
         }
 
@@ -193,7 +209,7 @@ function submit() {
 
 // })
 
-$("input[name=email]").blur(checkEmail)
+// $("input[name=email]").blur(checkEmail)
 
 
 

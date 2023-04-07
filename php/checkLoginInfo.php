@@ -32,16 +32,22 @@ if (isset($_POST['action']) && $_POST['action'] == "loginPage") {
 
 if (isset($_POST['action']) && $_POST['action'] == 'loginPage') {
 
-    if (isset($_POST['loginBy']) && $_POST['loginBy'] == 'form')
-        if ((empty($_POST['psw']) || empty($_POST['email']))) {
-            exit();
-        } else {
+    if (isset($_POST['loginBy']) && $_POST['loginBy'] == 'form') {
+        // if (empty($_POST['psw']) && empty($_POST['email']))
+        //     exit('both');
+        // if ((empty($_POST['psw']))) {
+        //     exit('psw');
+        // }
+        // if (empty($_POST['email'])) {
+        //     exit('email');
+        // } else
+        {
             $psw = $_POST['psw'];
             $email =  $_POST['email'];
 
             $query = $conn->query("SELECT * FROM table_form WHERE  email = '$email' AND password= MD5('$psw') ");
         }
-    else if (isset($_POST['loginBy']) && $_POST['loginBy'] == 'glogin') {
+    } else if (isset($_POST['loginBy']) && $_POST['loginBy'] == 'glogin') {
         $email =  $_POST['email'];
         $query = $conn->query("SELECT * FROM table_form WHERE  email = '$email'  ");
 
@@ -62,7 +68,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'loginPage') {
         setcookie('id', $_SESSION['id'], time() + 86400 * 30, '/');
         echo ('success');
     } else
-        exit("invalid");
+        exit("incorrect");
 }
 
 $conn->close();
