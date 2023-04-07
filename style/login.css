@@ -11,14 +11,16 @@ body {
 
 form {
   display: grid;
+  border-radius: 5px;
   padding: 0 0.8rem;
 }
 
 label {
   color: #04aa6d;
   font-size: 0.9rem;
-  margin-bottom: 0.2rem;
-  margin-top: 0.8rem;
+  margin-bottom: 0.3rem;
+  /* margin-top: 0.5rem;
+  padding-left: 0.2rem; */
 }
 input {
   margin-top: 0;
@@ -37,7 +39,7 @@ input::placeholder {
 }
 
 form {
-  width: 25%;
+  width: 22%;
   box-shadow: 0px 0px 10px 3px #dee9e5;
 }
 
@@ -68,7 +70,7 @@ button {
 }
 
 a.login{
-    margin-top: 1.5rem;
+    margin-top: 1.3rem;
 }
 
 /* Add a hover effect for buttons */
@@ -81,18 +83,20 @@ a.login{
 /* Center the avatar image inside this container */
 .imgcontainer {
   text-align: center;
-  margin: 24px 0 12px 0;
+  margin: 24px 0 10px 0;
 }
 
 /* Avatar image */
 img.avatar {
-  width: 25%;
+  width: 45%;
   border-radius: 50%;
 }
 
 /* Add padding to containers */
 .container {
   padding: 16px;
+  padding-bottom: 10px;
+  padding-top: 10px;
   display: grid;
 }
 
@@ -135,7 +139,7 @@ hr {
 #buttonDiv {
   width: fit-content;
   justify-self: center;
-  margin-top: 1rem;
+  margin-top: 0.8rem;
   margin-bottom: 0.5rem;
 }
 
