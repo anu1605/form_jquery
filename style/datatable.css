@@ -57,8 +57,11 @@ a.edit{
     color: white;
     background-color: #0954386d;
 }
+a.location{
+    color: darkblue;
+}
 
-.location{
+/* .location{
     padding: 0.3rem 0.6rem;
     font-size: 0.8rem;
     border-radius: 10px;
@@ -66,8 +69,24 @@ a.edit{
     color: white;
     border: none;
     border-radius: 10px;
-}
+} */
 
-#map {
+/* #map {
     height: 100%;
+  } */
+
+  #map {
+    height: 50vh;
+    overflow: scroll;
   }
+  
+  /* 
+   * Optional: Makes the sample page fill the window. 
+   */
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  

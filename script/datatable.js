@@ -75,22 +75,27 @@ function getLocation(id) {
         data: { 'post_id': id, 'action': 'location' },
         success: function (location) {
             var loc = $.trim(location).split(',');
-            console.log(loc);
-            function initMap() {
-                const myLatLng = { lat: -25.363, lng: 131.044 };
-                const map = new google.maps.Map($("#map"), {
-                    zoom: 4,
-                    center: myLatLng,
-                });
-
-                new google.maps.Marker({
-                    position: myLatLng,
-                    map,
-                    title: "Hello World!",
-                });
-            }
-
-            window.initMap = initMap;
+            initMap(loc);
         }
     })
 }
+
+
+
+
+function initMap(loc) {
+    var myLatLng = { lat: -25.363, lng: 131.044 };
+    if (loc != undefined)
+        myLatLng = { lat: parseInt(loc[0]), lng: parseInt(loc[1]) };
+    const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 6,
+        center: myLatLng,
+    });
+
+    new google.maps.Marker({
+        position: myLatLng,
+        map,
+        title: "Hello World!",
+    });
+}
+window.initMap = initMap;

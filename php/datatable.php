@@ -56,7 +56,6 @@ if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
                 <th>about_yourself</th>
                 <th>image_files</th>
                 <th>date</th>
-                <th>location</th>
                 <th>button</th>
             </tr>
         </thead>
@@ -68,7 +67,7 @@ if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
 
     </table>
     <div id="map"></div>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8CR69C57TIBVPw2fYp7cOaWzK_jP42lg&callback=initMap&v=weekly" defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8CR69C57TIBVPw2fYp7cOaWzK_jP42lg&callback=initMap" async defer></script>
     <script src="/script/datatable.js"></script>
 
 
